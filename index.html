@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2563EB">
+<title>Graph Adventure - Struktur Data Graph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================= LOADING SCREEN ======================= -->
+<div id="loading-screen">
+  <div class="loading-graph">
+    <svg viewBox="0 0 200 200" class="loading-svg">
+      <line x1="40" y1="40" x2="160" y2="60" class="load-edge e1"/>
+      <line x1="160" y1="60" x2="120" y2="160" class="load-edge e2"/>
+      <line x1="120" y1="160" x2="30" y2="130" class="load-edge e3"/>
+      <line x1="30" y1="130" x2="40" y2="40" class="load-edge e4"/>
+      <line x1="40" y1="40" x2="120" y2="160" class="load-edge e5"/>
+      <circle cx="40" cy="40" r="10" class="load-node n1"/>
+      <circle cx="160" cy="60" r="10" class="load-node n2"/>
+      <circle cx="120" cy="160" r="10" class="load-node n3"/>
+      <circle cx="30" cy="130" r="10" class="load-node n4"/>
+    </svg>
+  </div>
+  <p class="loading-text">Menyusun simpul &amp; sisi<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+  <div class="loading-bar-track"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
+</div>
+
+<!-- ======================= TOP NAVBAR ======================= -->
+<header id="navbar" class="navbar">
+  <div class="nav-left">
+    <button class="icon-btn" id="btnHome" title="Beranda"><i class="fa-solid fa-house"></i></button>
+    <span class="brand"><i class="fa-solid fa-diagram-project"></i> Graph Adventure</span>
+  </div>
+  <div class="nav-progress-wrap">
+    <div class="nav-progress-track">
+      <div class="nav-progress-fill" id="progressFill"></div>
+    </div>
+    <span class="nav-progress-label" id="progressLabel">0 / 12</span>
+    <span class="stage-chip" id="stageChip"></span>
+  </div>
+  <div class="nav-right">
+    <div class="score-chip" id="scoreChip"><i class="fa-solid fa-star"></i> <span id="scoreValue">0</span></div>
+    <button class="icon-btn" id="btnSound" title="Musik"><i class="fa-solid fa-music"></i></button>
+    <button class="icon-btn" id="btnTheme" title="Mode Gelap/Terang"><i class="fa-solid fa-moon"></i></button>
+    <button class="icon-btn" id="btnHelp" title="Petunjuk"><i class="fa-solid fa-circle-question"></i></button>
+    <button class="icon-btn" id="btnFullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+  </div>
+</header>
+
+<!-- ======================= MAIN STAGE ======================= -->
+<main id="stage">
+
+  <!-- HALAMAN 1 : COVER -->
+  <section class="page cover-page active" id="page-cover">
+    <div class="cover-bg" id="coverBg"></div>
+    <div class="cover-content">
+      <div class="cover-badge fade-in">Informatika SMP · Kelas IX · Struktur Data</div>
+      <h1 class="cover-title fade-in-up">🎮 GRAPH<span>ADVENTURE</span></h1>
+      <p class="cover-subtitle fade-in-up delay-1">Menjelajahi Dunia Struktur Data Graph</p>
+      <div class="cover-menu fade-in-up delay-2">
+        <button class="menu-btn primary" data-goto="materi-start"><i class="fa-solid fa-play"></i> Mulai Pembelajaran</button>
+        <button class="menu-btn" data-goto="page-tujuan"><i class="fa-solid fa-book"></i> Materi</button>
+        <button class="menu-btn" data-goto="page-game-hub"><i class="fa-solid fa-gamepad"></i> Game</button>
+        <button class="menu-btn" id="btnPetunjukCover"><i class="fa-solid fa-book-open"></i> Petunjuk</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PENDAHULUAN 1 : ASESMEN DIAGNOSTIK -->
+  <section class="page" id="page-asesmen">
+    <div class="page-inner two-col">
+      <div class="col-svg"><div class="qr-box"><img src="QR_Asesmen_Awal.png" alt="QR Code Asesmen Diagnostik"><a href="https://q.me-qr.com/2a1hqavg" target="_blank" rel="noopener">q.me-qr.com/2a1hqavg</a></div></div>
+      <div class="col-text">
+        <div class="page-eyebrow">Pendahuluan · Asesmen Diagnostik</div>
+        <h2 class="page-title">Cek Pemahaman Awal</h2>
+        <p class="page-lead">Pindai QR Code atau buka tautan, lalu kerjakan <strong>6 soal</strong> secara mandiri.</p>
+        <ul class="bullet-list">
+          <li><i class="fa-solid fa-user"></i> Dikerjakan sendiri, tanpa membuka catatan</li>
+          <li><i class="fa-solid fa-clock"></i> Waktu sekitar 4 menit</li>
+          <li><i class="fa-solid fa-circle-info"></i> Hasilnya bukan nilai akhir, tetapi dipakai guru untuk menentukan LKM yang sesuai</li>
+        </ul>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- PENDAHULUAN 2 : KAITAN TREE + PERTANYAAN PEMANTIK -->
+  <section class="page" id="page-pemantik-awal">
+    <div class="page-inner two-col">
+      <div class="col-svg"><div id="svg-tree-intro" class="graph-canvas small"></div><p class="caption-center">Contoh Tree: struktur organisasi sekolah</p></div>
+      <div class="col-text">
+        <div class="page-eyebrow">Pendahuluan · Ingat Kembali</div>
+        <h2 class="page-title">Dari Tree ke Peta Lokasi</h2>
+        <p class="page-lead">Pada struktur organisasi sekolah, setiap bagian terhubung berjenjang dari atas ke bawah. Sekarang bayangkan hubungan antarlokasi pada peta Buleleng.</p>
+        <div class="pemantik-card">
+          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Bagaimana cara menggambarkan hubungan antara beberapa lokasi yang terhubung?"</p>
+          <button class="ghost-btn pemantik-toggle">Lihat Poin Diskusi <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="pemantik-hint">Tuliskan dugaan awalmu. Belum ada jawaban benar atau salah, kita temukan bersama pada kegiatan berikutnya.</div>
+        </div>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 2 : TUJUAN PEMBELAJARAN -->
+  <section class="page" id="page-tujuan">
+    <div class="page-inner">
+      <div class="page-eyebrow">Sebelum Berangkat</div>
+      <h2 class="page-title">Tujuan Pembelajaran</h2>
+      <p class="page-lead">Setelah mengikuti pembelajaran melalui diskusi, eksplorasi materi, dan game interaktif, peserta didik mampu:</p>
+      <ul class="checklist" id="tujuanList">
+        <li><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Menganalisis karakteristik struktur data graph beserta komponen penyusunnya (vertex dan edge) serta membedakannya dengan struktur data tree secara tepat.</span></li>
+        <li><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Menganalisis jenis-jenis graph (directed graph, undirected graph, dan weighted graph) serta menentukan jenis graph yang paling sesuai untuk merepresentasikan suatu permasalahan kontekstual.</span></li>
+      </ul>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- INTI 1 : STIMULATION (peta 4 lokasi) -->
+  <section class="page" id="page-peta-buleleng">
+    <div class="page-inner">
+      <div class="page-eyebrow">Inti · Stimulation</div>
+      <h2 class="page-title">Peta Sederhana Kabupaten Buleleng</h2>
+      <p class="page-lead">Amati empat lokasi berikut: Kota Singaraja, Pantai Lovina, Air Terjun Gitgit, dan Danau Buyan.</p>
+      <div class="buleleng-map" id="bulelengMap"><!-- diisi oleh JS --></div>
+      <div class="section-label">Pertanyaan Stimulasi</div>
+      <div class="pemantik-list">
+        <div class="pemantik-card">
+          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Bagaimana cara kita menggambarkan hubungan antarlokasi ini?"</p>
+          <button class="ghost-btn pemantik-toggle">Lihat Poin Diskusi <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="pemantik-hint">Ceritakan pengalamanmu mengenal lokasi-lokasi ini, lalu duga cara menggambarkan hubungannya. Istilah dan penjelasan konsep ditahan dulu.</div>
+        </div>
+        <div class="pemantik-card">
+          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Lokasi mana yang langsung terhubung dengan Singaraja? Bagaimana menuju Danau Buyan dari Singaraja?"</p>
+          <button class="ghost-btn pemantik-toggle">Lihat Poin Diskusi <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="pemantik-hint">Singaraja terhubung langsung dengan Lovina dan Gitgit. Menuju Danau Buyan harus melewati Gitgit, jadi ada urutan lokasi yang dilalui.</div>
+        </div>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- INTI 2 : PROBLEM STATEMENT -->
+  <section class="page" id="page-masalah">
+    <div class="page-inner">
+      <div class="page-eyebrow">Inti · Problem Statement</div>
+      <h2 class="page-title">Masalah yang Kita Selidiki</h2>
+      <p class="page-lead">Bagaimana menggambarkan lokasi-lokasi beserta hubungan di antaranya? Buka <strong>LKM</strong>, lalu rumuskan pertanyaan kelompokmu tentang:</p>
+      <div class="pemantik-list">
+        <div class="pemantik-card"><p class="pemantik-q"><i class="fa-solid fa-circle-dot"></i> Apa yang mewakili setiap lokasi pada gambar? (simpul)</p></div>
+        <div class="pemantik-card"><p class="pemantik-q"><i class="fa-solid fa-link"></i> Apa yang mewakili hubungan antarlokasi? (sisi)</p></div>
+        <div class="pemantik-card"><p class="pemantik-q"><i class="fa-solid fa-route"></i> Bagaimana urutan lokasi yang dilalui dari satu lokasi ke lokasi lain? (jalur)</p></div>
+      </div>
+      <p class="page-lead">Tuliskan pertanyaan kelompok di LKM. Jawaban akhir kita cari lewat pengamatan.</p>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 3 : APERSEPSI -->
+  <section class="page" id="page-apersepsi">
+    <div class="page-inner">
+      <div class="page-eyebrow">Amati &amp; Pikirkan</div>
+      <h2 class="page-title">Apa Persamaan Gambar-Gambar Ini?</h2>
+      <div class="apersepsi-grid">
+        <div class="apersepsi-card"><div class="apersepsi-icon maps"><i class="fa-solid fa-map-location-dot"></i></div><span>Google Maps</span></div>
+        <div class="apersepsi-card"><div class="apersepsi-icon social"><i class="fa-solid fa-share-nodes"></i></div><span>Media Sosial</span></div>
+        <div class="apersepsi-card"><div class="apersepsi-icon network"><i class="fa-solid fa-network-wired"></i></div><span>Jaringan Komputer</span></div>
+        <div class="apersepsi-card"><div class="apersepsi-icon flight"><i class="fa-solid fa-plane"></i></div><span>Jalur Penerbangan</span></div>
+      </div>
+      <p class="apersepsi-question">"Apa persamaan dari gambar-gambar tersebut?"</p>
+      <button class="menu-btn primary" id="btnLihatJawaban"><i class="fa-solid fa-eye"></i> Lihat Jawaban</button>
+      <div class="apersepsi-answer" id="apersepsiAnswer">
+        <i class="fa-solid fa-lightbulb"></i>
+        <p>Semua objek tersebut menunjukkan <strong>hubungan antarobjek</strong> yang dapat direpresentasikan menggunakan struktur data <strong>Graph</strong>.</p>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 4 : APA ITU GRAPH -->
+  <section class="page" id="page-apaitu">
+    <div class="page-inner two-col">
+      <div class="col-svg"><div id="svg-apaitu" class="graph-canvas"></div></div>
+      <div class="col-text">
+        <div class="page-eyebrow">Inti · Generalization</div>
+        <h2 class="page-title">Apa itu Graph?</h2>
+        <p class="page-lead">Graph adalah struktur data yang terdiri atas kumpulan <strong>vertex (simpul)</strong> dan <strong>edge (sisi)</strong> yang digunakan untuk merepresentasikan hubungan antarobjek.</p>
+        <button class="ghost-btn" id="btnReplayApaitu"><i class="fa-solid fa-rotate-right"></i> Putar Ulang Animasi</button>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 5 : KOMPONEN GRAPH -->
+  <section class="page" id="page-komponen">
+    <div class="page-inner two-col">
+      <div class="col-svg"><div id="svg-komponen" class="graph-canvas interactive-hint"></div></div>
+      <div class="col-text">
+        <div class="page-eyebrow">Inti · Data Collection</div>
+        <h2 class="page-title">Komponen Graph</h2>
+        <p class="page-lead">Klik sebuah <strong>simpul (node)</strong> atau <strong>sisi (garis)</strong> pada graph untuk melihat penjelasannya.</p>
+        <div class="info-card" id="komponenInfo">
+          <i class="fa-solid fa-hand-pointer"></i>
+          <p>Silakan klik salah satu vertex atau edge pada gambar.</p>
+        </div>
+        <div class="task-box" id="komponenTask">
+          <p class="task-q">Tugas LKM: hitung vertex dan edge, lalu telusuri satu jalur dari A ke D.</p>
+          <div class="task-row">
+            <label>Vertex <input type="number" id="cntV" min="0" inputmode="numeric"></label>
+            <label>Edge <input type="number" id="cntE" min="0" inputmode="numeric"></label>
+            <label>Jalur A ke D <input type="text" id="cntPath" placeholder="contoh: A-B-C-D"></label>
+            <button class="task-btn" id="btnCekTask">Periksa</button>
+          </div>
+          <div class="task-feedback" id="taskFeedback"></div>
+        </div>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 6 : GRAPH VS TREE -->
+  <section class="page" id="page-vs">
+    <div class="page-inner">
+      <div class="page-eyebrow">Inti · Verification</div>
+      <h2 class="page-title">Graph vs Tree</h2>
+      <div class="vs-grid">
+        <div class="vs-card">
+          <h3><i class="fa-solid fa-sitemap"></i> Tree</h3>
+          <div id="svg-tree" class="graph-canvas small"></div>
+          <ul>
+            <li>Memiliki Root</li>
+            <li>Bersifat Hierarki</li>
+            <li>Tidak memiliki Siklus</li>
+            <li>Jalur Tunggal</li>
+          </ul>
+        </div>
+        <div class="vs-divider"><i class="fa-solid fa-code-compare"></i></div>
+        <div class="vs-card">
+          <h3><i class="fa-solid fa-diagram-project"></i> Graph</h3>
+          <div id="svg-vsgraph" class="graph-canvas small"></div>
+          <ul>
+            <li>Tidak harus memiliki Root</li>
+            <li>Hubungan Bebas</li>
+            <li>Dapat memiliki Siklus</li>
+            <li>Memiliki Banyak Jalur</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 7 : JENIS-JENIS GRAPH -->
+  <section class="page" id="page-jenis">
+    <div class="page-inner">
+      <div class="page-eyebrow">Tiga Jenis Utama</div>
+      <h2 class="page-title">Jenis-Jenis Graph</h2>
+      <div class="jenis-grid" id="jenisGrid">
+        <div class="jenis-card" data-jenis="undirected">
+          <div class="jenis-icon"><i class="fa-solid fa-minus"></i></div>
+          <h3>Undirected Graph</h3>
+          <p class="jenis-desc">Graph tanpa arah pada setiap sisinya.</p>
+        </div>
+        <div class="jenis-card" data-jenis="directed">
+          <div class="jenis-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+          <h3>Directed Graph</h3>
+          <p class="jenis-desc">Graph dengan arah pada setiap sisinya.</p>
+        </div>
+        <div class="jenis-card" data-jenis="weighted">
+          <div class="jenis-icon"><i class="fa-solid fa-weight-hanging"></i></div>
+          <h3>Weighted Graph</h3>
+          <p class="jenis-desc">Graph dengan bobot pada setiap sisinya.</p>
+        </div>
+      </div>
+      <div class="jenis-expand" id="jenisExpand"></div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 8 : UNDIRECTED GRAPH -->
+  <section class="page" id="page-undirected">
+    <div class="page-inner two-col">
+      <div class="col-svg"><div id="svg-undirected" class="graph-canvas"></div></div>
+      <div class="col-text">
+        <div class="page-eyebrow">Jenis Graph #1</div>
+        <h2 class="page-title">Undirected Graph</h2>
+        <p class="page-lead">Graph tanpa arah — hubungan antar simpul berlaku dua arah.</p>
+        <p class="section-label">Contoh:</p>
+        <ul class="bullet-list">
+          <li><i class="fa-solid fa-road"></i> Jalan dua arah</li>
+          <li><i class="fa-solid fa-user-group"></i> Pertemanan Facebook</li>
+          <li><i class="fa-solid fa-door-open"></i> Hubungan antar ruang</li>
+        </ul>
+        <div class="mini-quiz" data-quiz="undirected-quiz">
+          <p class="mini-quiz-q">Mini Quiz: Apakah dari B dapat menuju A?</p>
+          <div class="mini-quiz-opts">
+            <button class="opt-btn" data-correct="true">Ya, bisa</button>
+            <button class="opt-btn" data-correct="false">Tidak bisa</button>
+          </div>
+          <div class="mini-quiz-feedback"></div>
+        </div>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 9 : DIRECTED GRAPH -->
+  <section class="page" id="page-directed">
+    <div class="page-inner two-col">
+      <div class="col-svg"><div id="svg-directed" class="graph-canvas"></div></div>
+      <div class="col-text">
+        <div class="page-eyebrow">Jenis Graph #2</div>
+        <h2 class="page-title">Directed Graph</h2>
+        <p class="page-lead">Graph berarah — hubungan antar simpul memiliki arah tertentu.</p>
+        <p class="section-label">Contoh:</p>
+        <ul class="bullet-list">
+          <li><i class="fa-brands fa-instagram"></i> Instagram Follow</li>
+          <li><i class="fa-solid fa-car"></i> Jalan satu arah</li>
+          <li><i class="fa-solid fa-diagram-successor"></i> Alur pekerjaan</li>
+        </ul>
+        <div class="mini-quiz" data-quiz="directed-quiz">
+          <p class="mini-quiz-q">Mini Quiz: Apakah dari B selalu dapat menuju A?</p>
+          <div class="mini-quiz-opts">
+            <button class="opt-btn" data-correct="false">Ya, selalu bisa</button>
+            <button class="opt-btn" data-correct="true">Belum tentu</button>
+          </div>
+          <div class="mini-quiz-feedback"></div>
+        </div>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 10 : WEIGHTED GRAPH -->
+  <section class="page" id="page-weighted">
+    <div class="page-inner two-col">
+      <div class="col-svg"><div id="svg-weighted" class="graph-canvas"></div></div>
+      <div class="col-text">
+        <div class="page-eyebrow">Jenis Graph #3</div>
+        <h2 class="page-title">Weighted Graph</h2>
+        <p class="page-lead">Setiap edge pada weighted graph memiliki <strong>angka (bobot)</strong> yang dapat berupa:</p>
+        <div class="weight-tags">
+          <span><i class="fa-solid fa-ruler"></i> Jarak</span>
+          <span><i class="fa-solid fa-coins"></i> Biaya</span>
+          <span><i class="fa-solid fa-clock"></i> Waktu</span>
+          <span><i class="fa-solid fa-gauge-high"></i> Kecepatan</span>
+        </div>
+        <p class="section-label">Contoh penggunaan:</p>
+        <ul class="bullet-list"><li><i class="fa-solid fa-map-location-dot"></i> Google Maps — menghitung jarak &amp; waktu tempuh antar lokasi.</li></ul>
+      </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 11 : PENERAPAN GRAPH -->
+  <section class="page" id="page-penerapan">
+    <div class="page-inner">
+      <div class="page-eyebrow">Di Dunia Nyata</div>
+      <h2 class="page-title">Penerapan Graph</h2>
+      <div class="penerapan-grid" id="penerapanGrid">
+        <div class="penerapan-card" data-p="maps"><i class="fa-solid fa-map-location-dot"></i><span>Google Maps</span></div>
+        <div class="penerapan-card" data-p="social"><i class="fa-solid fa-share-nodes"></i><span>Media Sosial</span></div>
+        <div class="penerapan-card" data-p="network"><i class="fa-solid fa-network-wired"></i><span>Jaringan Komputer</span></div>
+        <div class="penerapan-card" data-p="train"><i class="fa-solid fa-train"></i><span>Jalur Kereta</span></div>
+        <div class="penerapan-card" data-p="flight"><i class="fa-solid fa-plane"></i><span>Jalur Penerbangan</span></div>
+      </div>
+      <div class="penerapan-detail" id="penerapanDetail"></div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- HALAMAN 12 : RINGKASAN -->
+  <section class="page" id="page-ringkasan">
+    <div class="page-inner">
+      <div class="page-eyebrow">Sebelum Bermain</div>
+      <h2 class="page-title">Ringkasan Materi</h2>
+      <div class="mindmap" id="mindmap">
+        <div class="mm-center">GRAPH</div>
+        <div class="mm-node" style="--a:0">Vertex</div>
+        <div class="mm-node" style="--a:1">Edge</div>
+        <div class="mm-node" style="--a:2">Directed Graph</div>
+        <div class="mm-node" style="--a:3">Undirected Graph</div>
+        <div class="mm-node" style="--a:4">Weighted Graph</div>
+        <div class="mm-node" style="--a:5">Path</div>
+        <svg class="mm-lines" id="mmLines"></svg>
+      </div>
+      <button class="menu-btn primary big" data-goto="page-kesimpulan"><i class="fa-solid fa-flag-checkered"></i> LANJUT KE KESIMPULAN</button>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button></nav>
+  </section>
+
+  <!-- INTI 7 : GENERALIZATION + PENUTUP -->
+  <section class="page" id="page-kesimpulan">
+    <div class="page-inner">
+      <div class="page-eyebrow">Inti · Generalization &amp; Penutup</div>
+      <h2 class="page-title">Kesimpulan dan Refleksi</h2>
+      <div class="section-label">Lengkapi kesimpulan kelompok</div>
+      <ol class="kes-list">
+        <li>Graph merupakan ........................</li>
+        <li>Komponen utama Graph terdiri atas ........................</li>
+        <li>Jenis Graph yang telah dipelajari adalah ........................</li>
+        <li>Perbedaan utama Graph dan Tree adalah ........................</li>
+      </ol>
+      <button class="ghost-btn" id="btnKunciKes"><i class="fa-solid fa-eye"></i> Tampilkan penegasan konsep</button>
+      <div class="apersepsi-answer" id="kesKunci"><i class="fa-solid fa-lightbulb"></i>
+        <p><strong>Graph</strong> adalah struktur data berisi <strong>vertex</strong> (simpul) dan <strong>edge</strong> (sisi) untuk menyatakan hubungan antarobjek. Jenisnya: <strong>undirected</strong>, <strong>directed</strong>, dan <strong>weighted</strong>. Berbeda dengan Tree, Graph boleh membentuk siklus dan hubungannya tidak harus berjenjang.</p></div>
+      <div class="section-label">Refleksi</div>
+      <ul class="bullet-list">
+        <li><i class="fa-solid fa-lightbulb"></i> Apa yang sudah aku pahami hari ini?</li>
+        <li><i class="fa-solid fa-question"></i> Apa yang masih perlu aku pelajari?</li>
+        <li><i class="fa-solid fa-people-group"></i> Bagaimana kerja sama di kelompokku?</li>
+      </ul>
+      <button class="menu-btn primary big" data-goto="page-game-hub"><i class="fa-solid fa-gamepad"></i> MULAI GAME PENGUATAN</button>
+    </div>
+    <nav class="page-nav"><button class="nav-btn" onclick="showPage('page-ringkasan')"><i class="fa-solid fa-arrow-left"></i> Kembali</button></nav>
+  </section>
+
+  <!-- ======================= GAME HUB ======================= -->
+  <section class="page" id="page-game-hub">
+    <div class="page-inner">
+      <div class="page-eyebrow">Petualangan Dimulai</div>
+      <h2 class="page-title">Pilih Level</h2>
+      <div class="level-grid" id="levelGrid"><!-- filled by JS --></div>
+    </div>
+  </section>
+
+  <!-- Level containers will be injected by JS into #levelStage -->
+  <section class="page game-page" id="page-level-stage">
+    <div class="game-topbar">
+      <button class="nav-btn small" id="btnBackToHub"><i class="fa-solid fa-arrow-left"></i> Level</button>
+      <div class="game-meta">
+        <span class="badge-chip"><i class="fa-solid fa-layer-group"></i> Level <span id="levelNumLabel">1</span></span>
+        <span class="badge-chip timer-chip"><i class="fa-solid fa-hourglass-half"></i> <span id="levelTimer">00:00</span></span>
+        <span class="badge-chip"><i class="fa-solid fa-star"></i> <span id="levelScoreLabel">0</span></span>
+      </div>
+    </div>
+    <div class="level-progress-track"><div class="level-progress-fill" id="levelProgressFill"></div></div>
+    <div id="levelContent" class="level-content"><!-- filled by JS per level --></div>
+  </section>
+
+  <!-- HALAMAN PENUTUP -->
+  <section class="page" id="page-final">
+    <div class="final-content">
+      <div class="final-trophy"><i class="fa-solid fa-trophy"></i></div>
+      <h2 class="final-title">MISSION COMPLETE!</h2>
+      <p class="final-sub">Kamu telah menyelesaikan seluruh petualangan Graph!</p>
+      <div class="final-stats">
+        <div class="stat-box"><span class="stat-value" id="finalScore">0</span><span class="stat-label">Total Skor</span></div>
+        <div class="stat-box"><span class="stat-value" id="finalCorrect">0</span><span class="stat-label">Jawaban Benar</span></div>
+        <div class="stat-box"><span class="stat-value" id="finalPercent">0%</span><span class="stat-label">Persentase Nilai</span></div>
+      </div>
+      <div class="final-stars" id="finalStars">★★★★★</div>
+      <div class="badge-shelf" id="badgeShelf"></div>
+      <div class="final-actions">
+        <button class="menu-btn primary" id="btnPlayAgain"><i class="fa-solid fa-rotate-right"></i> Main Lagi</button>
+        <button class="menu-btn" data-goto="page-cover"><i class="fa-solid fa-house"></i> Beranda</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<canvas id="confettiCanvas"></canvas>
+
+<!-- ======================= PETUNJUK MODAL ======================= -->
+<div class="modal-overlay" id="petunjukModal">
+  <div class="modal-box">
+    <button class="modal-close" id="closePetunjuk"><i class="fa-solid fa-xmark"></i></button>
+    <h3><i class="fa-solid fa-book-open"></i> Petunjuk Penggunaan</h3>
+    <ul>
+      <li><i class="fa-solid fa-house"></i> Tekan tombol <strong>Home</strong> kapan saja untuk kembali ke cover.</li>
+      <li><i class="fa-solid fa-arrow-right"></i> Gunakan tombol <strong>Lanjut / Kembali</strong> untuk berpindah antar materi.</li>
+      <li><i class="fa-solid fa-hand-pointer"></i> Beberapa gambar graph bisa <strong>diklik</strong> untuk melihat penjelasan.</li>
+      <li><i class="fa-solid fa-gamepad"></i> Menu <strong>Game</strong> berisi 8 level tantangan dengan skor, waktu, dan lencana.</li>
+      <li><i class="fa-solid fa-music"></i> Tombol musik untuk menyalakan/mematikan efek suara latar.</li>
+      <li><i class="fa-solid fa-moon"></i> Tombol bulan/matahari untuk mengganti mode gelap/terang.</li>
+    </ul>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
