@@ -41,7 +41,7 @@
     <div class="nav-progress-track">
       <div class="nav-progress-fill" id="progressFill"></div>
     </div>
-    <span class="nav-progress-label" id="progressLabel">0 / 12</span>
+    <span class="nav-progress-label" id="progressLabel">0 / 16</span>
     <span class="stage-chip" id="stageChip"></span>
   </div>
   <div class="nav-right">
@@ -79,31 +79,49 @@
       <div class="col-text">
         <div class="page-eyebrow">Pendahuluan · Asesmen Diagnostik</div>
         <h2 class="page-title">Cek Pemahaman Awal</h2>
-        <p class="page-lead">Pindai QR Code atau buka tautan, lalu kerjakan <strong>6 soal</strong> secara mandiri.</p>
+        <p class="page-lead">Pindai QR Code atau buka tautan Google Forms, lalu kerjakan <strong>6 soal</strong> secara mandiri.</p>
         <ul class="bullet-list">
-          <li><i class="fa-solid fa-user"></i> Dikerjakan sendiri, tanpa membuka catatan</li>
+          <li><i class="fa-solid fa-user"></i> Dikerjakan sendiri dan jujur</li>
           <li><i class="fa-solid fa-clock"></i> Waktu sekitar 4 menit</li>
-          <li><i class="fa-solid fa-circle-info"></i> Hasilnya bukan nilai akhir, tetapi dipakai guru untuk menentukan LKM yang sesuai</li>
+          <li><i class="fa-solid fa-circle-info"></i> Bukan ujian penentu nilai rapor. Hasilnya dipakai guru untuk menyesuaikan bantuan belajar</li>
         </ul>
       </div>
     </div>
     <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
   </section>
 
-  <!-- PENDAHULUAN 2 : KAITAN TREE + PERTANYAAN PEMANTIK -->
-  <section class="page" id="page-pemantik-awal">
+  <!-- PENDAHULUAN 2 : APERSEPSI TREE (skenario 1.6) -->
+  <section class="page" id="page-apersepsi-tree">
     <div class="page-inner two-col">
       <div class="col-svg"><div id="svg-tree-intro" class="graph-canvas small"></div><p class="caption-center">Contoh Tree: struktur organisasi sekolah</p></div>
       <div class="col-text">
-        <div class="page-eyebrow">Pendahuluan · Ingat Kembali</div>
-        <h2 class="page-title">Dari Tree ke Peta Lokasi</h2>
-        <p class="page-lead">Pada struktur organisasi sekolah, setiap bagian terhubung berjenjang dari atas ke bawah. Sekarang bayangkan hubungan antarlokasi pada peta Buleleng.</p>
+        <div class="page-eyebrow">Pendahuluan · Apersepsi</div>
+        <h2 class="page-title">Ingat Kembali: Tree</h2>
+        <p class="page-lead">Pada pertemuan sebelumnya kita sudah belajar struktur data <strong>Tree</strong>.</p>
         <div class="pemantik-card">
-          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Bagaimana cara menggambarkan hubungan antara beberapa lokasi yang terhubung?"</p>
+          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Siapa yang masih ingat, apa saja bagian dari Tree?"</p>
           <button class="ghost-btn pemantik-toggle">Lihat Poin Diskusi <i class="fa-solid fa-chevron-down"></i></button>
-          <div class="pemantik-hint">Tuliskan dugaan awalmu. Belum ada jawaban benar atau salah, kita temukan bersama pada kegiatan berikutnya.</div>
+          <div class="pemantik-hint">Tree terdiri dari <strong>node</strong>, yaitu titik yang menyimpan data, dan hubungan antarnode yang tersusun bertingkat dari atas ke bawah. Setiap node kecuali yang paling atas hanya punya satu node di atasnya.</div>
         </div>
       </div>
+    </div>
+    <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
+  </section>
+
+  <!-- PENDAHULUAN 3 : PERTANYAAN PEMANTIK (jembatan Tree ke Graph) -->
+  <section class="page" id="page-pemantik-awal">
+    <div class="page-inner">
+      <div class="page-eyebrow">Pendahuluan · Pertanyaan Pemantik</div>
+      <h2 class="page-title">Pertanyaan Pemantik</h2>
+      <p class="page-lead">Struktur organisasi sekolah menggambarkan hubungan yang <strong>bertingkat</strong> dari atas ke bawah.</p>
+      <div class="pemantik-list">
+        <div class="pemantik-card">
+          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Namun, bagaimana jika kalian diminta menggambarkan hubungan antarlokasi yang saling terhubung?"</p>
+          <button class="ghost-btn pemantik-toggle">Lihat Poin Diskusi <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="pemantik-hint">Dugaan yang mungkin muncul: digambar bertingkat seperti Tree, atau lokasi digambar sebagai titik lalu hubungannya sebagai garis. Belum dibenarkan atau disalahkan, karena kamu akan membuktikannya sendiri pada kegiatan berikutnya.</div>
+        </div>
+      </div>
+      <p class="page-lead">Pikirkan sebentar, lalu sampaikan dugaan awalmu.</p>
     </div>
     <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
   </section>
@@ -111,37 +129,36 @@
   <!-- HALAMAN 2 : TUJUAN PEMBELAJARAN -->
   <section class="page" id="page-tujuan">
     <div class="page-inner">
-      <div class="page-eyebrow">Sebelum Berangkat</div>
+      <div class="page-eyebrow">Pendahuluan · Tujuan Pembelajaran</div>
       <h2 class="page-title">Tujuan Pembelajaran</h2>
-      <p class="page-lead">Setelah mengikuti pembelajaran melalui diskusi, eksplorasi materi, dan game interaktif, peserta didik mampu:</p>
+      <p class="page-lead">Tujuan pembelajaran hari ini ada dua. Kalian dapat:</p>
       <ul class="checklist" id="tujuanList">
-        <li><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Menganalisis karakteristik struktur data graph beserta komponen penyusunnya (vertex dan edge) serta membedakannya dengan struktur data tree secara tepat.</span></li>
-        <li><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Menganalisis jenis-jenis graph (directed graph, undirected graph, dan weighted graph) serta menentukan jenis graph yang paling sesuai untuk merepresentasikan suatu permasalahan kontekstual.</span></li>
+        <li><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Menganalisis karakteristik struktur data Graph beserta komponennya, yaitu vertex dan edge, serta membedakannya dengan Tree.</span></li>
+        <li><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Menganalisis jenis-jenis Graph, yaitu directed graph, undirected graph, dan weighted graph, lalu menentukan jenis yang paling sesuai untuk suatu permasalahan.</span></li>
       </ul>
     </div>
     <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
   </section>
 
-  <!-- INTI 1 : STIMULATION (peta 4 lokasi) -->
+  <!-- INTI 1 : STIMULATION (peta 4 lokasi, skenario 2.1) -->
   <section class="page" id="page-peta-buleleng">
     <div class="page-inner">
       <div class="page-eyebrow">Inti · Stimulation</div>
       <h2 class="page-title">Peta Sederhana Kabupaten Buleleng</h2>
-      <p class="page-lead">Amati empat lokasi berikut: Kota Singaraja, Pantai Lovina, Air Terjun Gitgit, dan Danau Buyan.</p>
+      <p class="page-lead">Perhatikan layar. Ini peta lokasi wisata di sekitar Singaraja. Amati baik-baik letak tempatnya dan jalan yang menghubungkannya.</p>
       <div class="buleleng-map" id="bulelengMap"><!-- diisi oleh JS --></div>
       <div class="section-label">Pertanyaan Stimulasi</div>
       <div class="pemantik-list">
         <div class="pemantik-card">
-          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Bagaimana cara kita menggambarkan hubungan antarlokasi ini?"</p>
+          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Siapa yang pernah mengunjungi salah satu tempat ini? Ceritakan pengalamanmu."</p>
           <button class="ghost-btn pemantik-toggle">Lihat Poin Diskusi <i class="fa-solid fa-chevron-down"></i></button>
-          <div class="pemantik-hint">Ceritakan pengalamanmu mengenal lokasi-lokasi ini, lalu duga cara menggambarkan hubungannya. Istilah dan penjelasan konsep ditahan dulu.</div>
+          <div class="pemantik-hint">Contoh pengalaman: pernah ke Air Terjun Gitgit bersama keluarga, atau ke Pantai Lovina naik motor sekitar dua puluh menit dari Kota Singaraja dengan jalan yang langsung menuju Lovina.</div>
         </div>
         <div class="pemantik-card">
-          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Lokasi mana yang langsung terhubung dengan Singaraja? Bagaimana menuju Danau Buyan dari Singaraja?"</p>
-          <button class="ghost-btn pemantik-toggle">Lihat Poin Diskusi <i class="fa-solid fa-chevron-down"></i></button>
-          <div class="pemantik-hint">Singaraja terhubung langsung dengan Lovina dan Gitgit. Menuju Danau Buyan harus melewati Gitgit, jadi ada urutan lokasi yang dilalui.</div>
+          <p class="pemantik-q"><i class="fa-solid fa-comment-dots"></i> "Sekarang pikirkan: lokasi mana yang langsung terhubung dengan Singaraja, dan bagaimana menuju Danau Buyan dari Singaraja?"</p>
         </div>
       </div>
+      <p class="page-lead">Jangan dijawab dulu. Kita akan menyelidikinya bersama.</p>
     </div>
     <nav class="page-nav"><button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</button><button class="nav-btn next-btn">Lanjut <i class="fa-solid fa-arrow-right"></i></button></nav>
   </section>

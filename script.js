@@ -16,7 +16,7 @@ const APP = {
   materialOrder: [
     // Urutan mengikuti langkah RPM
     'page-cover',
-    'page-asesmen','page-pemantik-awal','page-tujuan',            // Pendahuluan
+    'page-asesmen','page-apersepsi-tree','page-pemantik-awal','page-tujuan', // Pendahuluan
     'page-peta-buleleng',                                         // Stimulation
     'page-masalah',                                               // Problem Statement
     'page-komponen',                                              // Data Collection
@@ -25,7 +25,7 @@ const APP = {
     'page-apaitu','page-penerapan','page-ringkasan','page-kesimpulan' // Generalization
   ],
   stageOf: {
-    'page-asesmen':'Pendahuluan','page-pemantik-awal':'Pendahuluan','page-tujuan':'Pendahuluan',
+    'page-asesmen':'Pendahuluan','page-apersepsi-tree':'Pendahuluan','page-pemantik-awal':'Pendahuluan','page-tujuan':'Pendahuluan',
     'page-peta-buleleng':'Stimulation','page-masalah':'Problem Statement','page-komponen':'Data Collection',
     'page-jenis':'Data Processing','page-undirected':'Data Processing','page-directed':'Data Processing','page-weighted':'Data Processing',
     'page-vs':'Verification','page-apaitu':'Generalization','page-penerapan':'Generalization',
@@ -136,7 +136,7 @@ function bindNav(){
 /* Trigger per-page enter animations / setup */
 function runPageEnterAnimation(pageId){
   if (pageId === 'page-tujuan') animateChecklist();
-  if (pageId === 'page-pemantik-awal') renderTreeGraph('svg-tree-intro');
+  if (pageId === 'page-apersepsi-tree') renderTreeGraph('svg-tree-intro');
   if (pageId === 'page-peta-buleleng') renderBulelengMap();
   if (pageId === 'page-apaitu') renderApaituGraph();
   if (pageId === 'page-komponen') renderKomponenGraph();
@@ -333,8 +333,8 @@ function animateChecklist(){
 }
 
 /* -- Halaman 2B: peta sederhana Kabupaten Buleleng -- */
-function renderBulelengMap(){
-  const container = document.getElementById('bulelengMap');
+function renderBulelengMap(containerId = 'bulelengMap'){
+  const container = document.getElementById(containerId);
   if (!container || container.dataset.built) return; // ilustrasi statis, cukup dibangun sekali
   const nodes = [
     { id:'SGR', label:'Singaraja',    x:300, y:110 },
